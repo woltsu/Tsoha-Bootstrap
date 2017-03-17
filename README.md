@@ -2,8 +2,8 @@
 
 Yleisiä linkkejä:
 
-* [Linkki sovellukseeni](https://www.cs.helsinki.fi)
-* [Linkki dokumentaatiooni](https://www.github.com)
+* [Linkki sovellukseeni](http://wolli.users.cs.helsinki.fi/huuto/)
+* [Linkki dokumentaatiooni](https://github.com/woltsu/Tsoha-Bootstrap/tree/master/doc)
 
 ## Työn aihe
 

@@ -2,7 +2,7 @@
 Työn aiheena on verkkohuutokauppa. Verkkohuutokaupan toiminta muistuttaa normaaliia huutokauppaa, mutta huudot tehdään netin välityksellä. Työ toteutetaan users-palvelimella. Alustajärjestelmän täytyy tukea PHP:tä. Tietokantana käytämme PostgreSQL-tietokantaa.
 
 2. Käyttötapaukset
-	1. Käyttäjä kirjautuu sivulle
+	1. Käyttäjä/myyjä kirjautuu sivulle
         2. Myyjä asettaa tuotteen myyntiin
         3. Myyjä muokkaa tuotteen tietoja
         4. Myyjä lisää tuoteluokan

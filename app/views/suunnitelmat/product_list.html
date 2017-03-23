@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block content %}  
+
+<div style="margin-bottom: 25px">
+    <h1 style="margin-bottom: 25px">Luokat:</h1>
+    <div class="form-inline" style="margin-bottom: 10px">
+        <a>Urheilu</a>
+        <button class="btn btn-danger">-</button>
+    </div>
+    <form class="form-inline">
+        <select class="form-control">
+            <option>Vapaa-aika</option>
+        </select>
+        <button class="btn btn-success">+</button>
+    </form>
+</div>
+
+<div style="width: 70%;
+     background-color: white;
+     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+     margin-bottom: 25px;">
+
+    <a href="urheilu/1"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Soccer_ball_on_ground.jpg/1280px-Soccer_ball_on_ground.jpg" alt="pallo" style="max-width: 100%"></a>
+    <div style="text-align: center;
+         padding: 10px 20px;">
+        <p>Pallo</p>
+    </div>
+</div>
+
+<div style="width: 70%;
+     background-color: white;
+     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+     margin-bottom: 25px;">
+
+    <a href="#"><img src="https://static.pexels.com/photos/54334/running-shoe-shoe-brooks-highly-functional-54334.jpeg" alt="lenkkarit" style="max-width: 100%"></a>
+    <div style="text-align: center;
+         padding: 10px 20px;">
+        <p>Lenkkarit</p>
+    </div>
+</div>
+
+{% endblock %}

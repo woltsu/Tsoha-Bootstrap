@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block content %}
+<div style="margin-bottom: 50px">
+    <h1>Lisää tuoteluokka</h1>
+    <form>
+        <div class="form-group">
+            <label>Tuoteluokan nimi</label>
+            <input type="text" class="form-control">
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Lisää tuoteluokka</button>
+        </div>
+    </form>
+</div>
+
+<div style="margin-bottom: 50px">
+    <h1>Poista tuoteluokka</h1>
+    <form>
+        <div class="form-group">
+            <label>Tuoteluokan nimi</label>
+            <div class="form-group">
+                <select class="form-control">
+                    <option>Urheilu</option>
+                    <option>Vapaa-aika</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-danger">Poista tuoteluokka</button>
+        </div>
+    </form>
+</div>
+
+<div>
+    <h1>Lisää tuote</h1>
+    <form>
+        <div class="form-group">
+            <label>Nimi</label>
+            <input type="text" class="form-control">
+        </div>
+        <div class="form-group">
+            <label>Tuoteluokka</label>
+            <select class="form-control">
+                <option>Urheilu</option>
+                <option>Vapaa-aika</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Lähtöhinta</label>
+            <input type="text" class="form-control">
+        </div>
+        <div class="form-group">
+            <label>Kuvaus</label>
+            <textarea class="form-control">
+            </textarea>
+        </div>
+        <div class="form-group">
+            <label for="exampleInputFile">Kuva</label>
+            <input type="file" id="exampleInputFile">
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Lisää tuote</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

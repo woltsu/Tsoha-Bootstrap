@@ -15,3 +15,5 @@ Yleisiä linkkejä:
 [Esimerkki yksittäisestä tuotteesta](http://wolli.users.cs.helsinki.fi/huuto/urheilu/1)  
 [Esimerkki tuotteen muokkaamisesta](http://wolli.users.cs.helsinki.fi/huuto/urheilu/1/muokkaa)  
 [Esimerkki tuotteiden ja tuoteluokkien lisäämisestä](http://wolli.users.cs.helsinki.fi/huuto/admin)  
+
+[Listaus ja lisäys](http://wolli.users.cs.helsinki.fi/huuto/esitteet)

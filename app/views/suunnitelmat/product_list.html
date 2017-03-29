@@ -9,13 +9,34 @@
     </div>
     <form class="form-inline">
         <select class="form-control">
+            <option>Urheilu</option>
             <option>Vapaa-aika</option>
         </select>
         <button class="btn btn-success">+</button>
     </form>
 </div>
 
+{% for esite in esitteet %}
+
 <div style="width: 70%;
+     background-color: white;
+     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+     margin-bottom: 25px;">
+
+    <a href="{{base_path}}/esitteet/{{esite.id}}">{{esite.kuva}}</a>
+    <div style="text-align: center;
+         padding: 10px 20px;">
+        <p>{{esite.nimi}}</p>
+        <label>Sulkeutuu: {{esite.sulkeutuu}}</label>
+    </div>
+</div>
+
+{% endfor %}
+
+<a href="{{base_path}}/esitteet/lisaa" class="btn btn-success">Lisää esite</a>
+
+
+<!--<div style="width: 70%;
      background-color: white;
      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
      margin-bottom: 25px;">
@@ -25,9 +46,9 @@
          padding: 10px 20px;">
         <p>Pallo</p>
     </div>
-</div>
+</div>-->
 
-<div style="width: 70%;
+<!--<div style="width: 70%;
      background-color: white;
      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
      margin-bottom: 25px;">
@@ -37,6 +58,6 @@
          padding: 10px 20px;">
         <p>Lenkkarit</p>
     </div>
-</div>
+</div>-->
 
 {% endblock %}

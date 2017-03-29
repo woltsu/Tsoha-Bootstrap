@@ -15,8 +15,9 @@ CREATE TABLE Seurantalista(
 -- 
 CREATE TABLE Esite(
   id SERIAL PRIMARY KEY,
+  nimi varchar(40) NOT NULL,
   kuva bytea,
-  aloitusHinta numeric NOT NULL,
+  aloitusHinta numeric,
   avattu timestamp,
   sulkeutuu timestamp NOT NULL,
   kuvaus varchar(500)

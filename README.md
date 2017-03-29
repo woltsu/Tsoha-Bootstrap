@@ -10,5 +10,5 @@ Yleisiä linkkejä:
 [Aihe](http://advancedkittenry.github.io/suunnittelu_ja_tyoymparisto/aiheet/Huutokauppa.html) 
 
 ## Suunnittelusivuja
-[Etusivu](http://wolli.users.cs.helsinki.fi/huuto/)
+[Etusivu](http://wolli.users.cs.helsinki.fi/huuto/)  
 [Listaus ja lisäys](http://wolli.users.cs.helsinki.fi/huuto/esitteet)

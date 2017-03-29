@@ -14,4 +14,5 @@ Yleisiä linkkejä:
 [Listaus](http://wolli.users.cs.helsinki.fi/huuto/esitteet)  
 [Lisäys](http://wolli.users.cs.helsinki.fi/huuto/esitteet/lisaa)  
 [Yksittäinen tuote](http://wolli.users.cs.helsinki.fi/huuto/esitteet/1)  
-[Muokkaus](http://wolli.users.cs.helsinki.fi/huuto/esitteet/1/muokkaa)  
+[Tuotteen muokkaus](http://wolli.users.cs.helsinki.fi/huuto/esitteet/1/muokkaa)  
+[Tuoteluokkien muokkaus](http://wolli.users.cs.helsinki.fi/huuto/admin)

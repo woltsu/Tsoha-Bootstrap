@@ -23,10 +23,10 @@
      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
      margin-bottom: 25px;">
 
-    <a href="{{base_path}}/esitteet/{{esite.id}}">{{esite.kuva}}</a>
+    <a href="{{base_path}}/esitteet/{{esite.id}}">Kuva: {{esite.kuva}}</a>
     <div style="text-align: center;
          padding: 10px 20px;">
-        <p>{{esite.nimi}}</p>
+        <a href="{{base_path}}/esitteet/{{esite.id}}"><p>{{esite.nimi}}</p></a>
         <label>Sulkeutuu: {{esite.sulkeutuu}}</label>
     </div>
 </div>

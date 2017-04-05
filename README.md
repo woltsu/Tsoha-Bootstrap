@@ -2,8 +2,10 @@
 
 Yleisiä linkkejä:
 
-* [Linkki sovellukseeni](http://wolli.users.cs.helsinki.fi/huuto/)
-* [Linkki dokumentaatiooni](https://github.com/woltsu/Tsoha-Bootstrap/blob/master/doc/dokumentaatio.pdf)
+* [Sovellus](http://wolli.users.cs.helsinki.fi/huuto/)
+* [Dokumentaatio](https://github.com/woltsu/Tsoha-Bootstrap/blob/master/doc/dokumentaatio.pdf)
+* [Käyttöohjeet](https://github.com/woltsu/Tsoha-Bootstrap/blob/master/doc/käyttöohje.pdf)  
+> Kirjautumiseen tarvittavat tiedot ovat käyttöohjeissa.  
 
 ## Työn aihe
 

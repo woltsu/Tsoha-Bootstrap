@@ -1,42 +1,52 @@
 {% extends "base.html" %}
 {% block content %}
-<h1>Muokkaa tuotetta Pallo</h1>
-<p>
-    <button class="btn btn-danger">Poista</button>
-</p>
-<form>
-    <div class="form-group">
-        <label>Nimi</label>
-        <input type="text" class="form-control" value="Pallo">
+{% import "macros/forms.html" as forms %}
+{% if user_logged_in.onkoAdmin %}
+
+<div>
+    <h1>Muokkaa tuotetta {{esite.nimi}}</h1>
+
+    <div style="margin: 1% 0% 2% 0%">
+        {{forms.destroy_button("#{base_path}/esitteet/#{esite.id}/destroy")}}
     </div>
-    <label>Tuoteluokat</label>
-    <div class="form-inline" style="margin-bottom: 10px">
-        <a>Urheilu</a>
-        <button class="btn btn-danger">-</button>
+
+    {% if errors %}
+    <div class="alert alert-danger">
+        <ul>
+            {% for error in errors %}
+            <li>{{error}}</li>
+            {% endfor %}
+        </ul>
     </div>
-    <div class="form-group form-inline">
-        <select class="form-control">
-            <option>Vapaa-aika</option>
-        </select>
-        <button class="btn btn-success">+</button>
-    </div>
-    <div class="form-group">
-        <label>Kuvaus</label>
-        <textarea class="form-control">
-        </textarea>
-    </div>
-    <div class="form-group">
-        <label for="exampleInputFile">Kuva</label>
-        <input type="file" id="exampleInputFile">
-    </div>
-    <div class="checkbox">
-        <label>
-            <input type="checkbox">
-            Suljettu
-        </label>
-    </div>
-    <div class="form-group">
-        <button type="submit" class="btn btn-primary">Tallenna</button>
-    </div>
-</form>
+    {% endif %}
+
+    <form method="post" action="{{base_path}}/esitteet/{{esite.id}}/muokkaa">
+        <div class="form-group">
+            <label>Nimi</label>
+            <input type="text" name="name" class="form-control">
+        </div>
+        <div class="form-group">
+            <label>Lähtöhinta</label>
+            <input type="text" name="startPrice" class="form-control">
+        </div>
+        <div class="form-group">
+            <label>Sulkeutuu</label>
+            <input type="datetime" name="ends" class="form-control">
+            <p class="help-block">pp.kk.vv</p>
+        </div>
+        <div class="form-group">
+            <label>Kuvaus</label>
+            <textarea name="description" class="form-control"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="exampleInputFile">Kuva</label>
+            <input type="file" name="picture" id="exampleInputFile">
+            <p class="help-block">Ei näy vielä kunnolla.</p>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-success">Päivitä</button>
+        </div>
+    </form>
+</div>
+{% endif %}
 {% endblock %}

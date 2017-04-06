@@ -6,6 +6,7 @@ class Esite extends BaseModel {
 
     public function __construct($attributes = null) {
         parent::__construct($attributes);
+        $this->validators = array('validate_name', 'validate_description', 'validate_aloitushinta', 'validate_sulkeutuu');
     }
 
     public static function all() {
@@ -46,4 +47,14 @@ class Esite extends BaseModel {
         $this->id = $row['id'];
     }
 
+    public function update($id) {
+        $query = DB::connection()->prepare('UPDATE Esite SET nimi = :name, kuva = :picture, aloitusHinta = :startPrice, sulkeutuu = :ends, kuvaus = :description WHERE id = :id');
+        $query->execute(array('name' => $this->nimi, 'picture' => $this->kuva, 'startPrice' => $this->aloitushinta, 'ends' => $this->sulkeutuu, 'description' => $this->kuvaus, 'id' => $id));
+    }
+
+    public function destroy() {
+        $query = DB::connection()->prepare('DELETE FROM Esite WHERE id = :id');
+        $query->execute(array('id' => $this->id));
+    }
+    
 }

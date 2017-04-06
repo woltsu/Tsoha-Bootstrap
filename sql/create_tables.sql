@@ -5,7 +5,8 @@ CREATE TABLE Asiakas(
   puh varchar(15) NOT NULL,
   etunimi varchar(40),
   sukunimi varchar(40),
-  password varchar(50) NOT NULL
+  password varchar(50) NOT NULL,
+  onkoAdmin boolean NOT NULL
 );
 -- 
 CREATE TABLE Seurantalista(

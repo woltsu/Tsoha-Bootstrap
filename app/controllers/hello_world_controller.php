@@ -10,11 +10,9 @@ class HelloWorldController extends BaseController {
 
     public static function sandbox() {
         // Testaa koodiasi täällä
-        $pallo = Esite::find(1);
-        $kaikkiEsitteet = Esite::all();
-
-        Kint::dump($pallo);
-        Kint::dump($kaikkiEsitteet);
+        $pallo = new Esite(array('nimi' => null, 'kuvaus' => ''));
+        $errors = $pallo->errors();
+        Kint::dump($errors);
     }
 
     public static function etusivu() {
@@ -29,9 +27,9 @@ class HelloWorldController extends BaseController {
         View::make('suunnitelmat/product_show.html');
     }
 
-    public static function product_edit() {
-        View::make('suunnitelmat/product_edit.html');
-    }
+//    public static function product_edit() {
+//        View::make('suunnitelmat/product_edit.html');
+//    }
 
     public static function adming_page() {
         View::make('suunnitelmat/admin_page.html');

@@ -1,30 +1,14 @@
 {% extends "base.html" %}
-{% block content %}  
+{% block content %}
 
-<h1 class="text-center" style="margin-bottom: 25px">Tervetuloa huutokaupan etusivulle</h1>
+{% if message %}
+<div class="alert alert-success">
+    <ul>
+        <li>{{message}}</li>
+    </ul>
+</div>
+{% endif %}
 
-<table class="table table-hover table-striped table-bordered">
-    <thead>
-        <tr>
-            <th>Tyyppi</th>
-            <th>Tuotteita</th>
-            <th>Halvin tuote</th>
-        </tr>
-    </thead>
-
-    <tbody>
-        <!--Listataan tuoteluokat tähän-->
-        <tr>
-            <td>Urheilu</td>
-            <td>2</td>
-            <td>2e</td>
-        </tr>
-        <tr>
-            <td>Vapaa-aika</td>
-            <td>0</td>
-            <td>ei ole</td>
-        </tr>
-    </tbody>
-</table>
+<h1>Tervetuloa huutokauppaan!</h1>
 
 {% endblock %}

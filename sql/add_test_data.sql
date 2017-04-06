@@ -1,7 +1,8 @@
 -- Lisää INSERT INTO lauseet tähän tiedostoon
 
 -- Asiakkaan testidata
-INSERT INTO Asiakas(email, puh, etunimi, sukunimi, password) VALUES ('essi.esimerkki@gmail.com', '0441234567', 'Essi', 'Esimerkki', 'salasana');
+INSERT INTO Asiakas(email, puh, etunimi, sukunimi, password, onkoAdmin) VALUES ('essi.esimerkki@gmail.com', '0441234567', 'Essi', 'Esimerkki', 'salasana', '0');
+INSERT INTO Asiakas(email, puh, etunimi, sukunimi, password, onkoAdmin) VALUES ('admin', '123', 'Admin', 'Admin', 'admin', '1');
 -- Seurantalistan testidata
 INSERT INTO Seurantalista(pvm) VALUES (current_timestamp);
 -- Esitteen testidata

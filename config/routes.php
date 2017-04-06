@@ -28,10 +28,28 @@ $routes->get('/esitteet/:id', function($id) {
     EsiteController::show($id);
 });
 
-$routes->get('/esitteet/:id/muokkaa', function() {
-    HelloWorldController::product_edit();
+$routes->get('/esitteet/:id/muokkaa', function($id) {
+    EsiteController::muokkaa($id);
+});
+
+$routes->post('/esitteet/:id/muokkaa', function($id) {
+    EsiteController::paivita($id);
+});
+
+$routes->post('/esitteet/:id/destroy', function($id) {
+    EsiteController::poista($id);
 });
 
 $routes->get('/admin', function() {
     HelloWorldController::adming_page();
 });
+
+$routes->get('/login', function(){
+  // Kirjautumislomakkeen esittäminen
+  AsiakasController::login();
+});
+$routes->post('/login', function(){
+  // Kirjautumisen käsittely
+  AsiakasController::handle_login();
+});
+

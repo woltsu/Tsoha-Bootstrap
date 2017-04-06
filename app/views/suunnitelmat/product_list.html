@@ -1,12 +1,14 @@
 {% extends "base.html" %}
 {% block content %}  
 
+{% if message %}
+<div class="alert alert-success">
+    {{message}}
+</div>
+{% endif %}
+
 <div style="margin-bottom: 25px">
     <h1 style="margin-bottom: 25px">Luokat:</h1>
-    <div class="form-inline" style="margin-bottom: 10px">
-        <a>Urheilu</a>
-        <button class="btn btn-danger">-</button>
-    </div>
     <form class="form-inline">
         <select class="form-control">
             <option>Urheilu</option>
@@ -33,7 +35,9 @@
 
 {% endfor %}
 
-<a href="{{base_path}}/esitteet/lisaa" class="btn btn-success">Lisää esite</a>
+{% if user_logged_in.onkoAdmin %}
+    <a href="{{base_path}}/esitteet/lisaa" class="btn btn-success">Lisää esite</a>
+{% endif %}
 
 
 <!--<div style="width: 70%;

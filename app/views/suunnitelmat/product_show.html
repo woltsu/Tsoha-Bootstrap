@@ -1,6 +1,12 @@
 {% extends "base.html" %}
 {% block content %}  
 
+{% if message %}
+<div class="alert alert-success">
+    {{message}}
+</div>
+{% endif %}
+
 <h1>{{esite.nimi}}</h1>
 <label>Kuva: {{esite.kuva}}</label>
 <ul>
@@ -17,5 +23,8 @@
     <button class="btn btn-primary">Tee tarjous</button>
 </p>
 
+{% if user_logged_in.onkoAdmin %}
+   <a href="{{base_path}}/esitteet/{{esite.id}}/muokkaa" class="btn btn-success">Muokkaa</a>
+{% endif %}
 
 {% endblock %}

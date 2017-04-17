@@ -1,7 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
 {% import "macros/forms.html" as forms %}
-{% if user_logged_in.onkoAdmin %}
 
 <div>
     <h1>Muokkaa tuotetta {{esite.nimi}}</h1>
@@ -48,5 +47,4 @@
         </div>
     </form>
 </div>
-{% endif %}
 {% endblock %}

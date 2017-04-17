@@ -31,8 +31,8 @@ class HelloWorldController extends BaseController {
 //        View::make('suunnitelmat/product_edit.html');
 //    }
 
-    public static function adming_page() {
-        View::make('suunnitelmat/admin_page.html');
-    }
+//    public static function adming_page() {
+//        View::make('suunnitelmat/admin_page.html');
+//    }
 
 }

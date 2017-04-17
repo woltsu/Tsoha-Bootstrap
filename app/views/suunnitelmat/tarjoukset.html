@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1>Tarjoukset</h1>
+
+{% for tarjous in tarjoukset %}
+
+<div style="width: 70%;
+     background-color: white;
+     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+     margin-bottom: 25px;">
+
+    <div style="text-align: center; padding: 10px 20px;">
+        <label>Asiakas: {{tarjous.asiakas_id}}</label>
+        <br>
+        <label>email: {{tarjous.asiakas.email}}</label>
+        <br>
+        <label>Summa: {{tarjous.summa}} </label>
+        <br>
+        <label>Pvm: {{tarjous.pvm}}</label>
+    </div>
+</div>
+
+{% endfor %}
+
+{% endblock %}

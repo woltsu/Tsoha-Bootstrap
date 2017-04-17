@@ -1,11 +1,20 @@
 {% extends "base.html" %}
 {% block content %}
+
+{% if message %}
+<div class="alert alert-success">
+    <ul>
+        <li>{{message}}</li>
+    </ul>
+</div>
+{% endif %}
+
 <div style="margin-bottom: 50px">
     <h1>Lisää tuoteluokka</h1>
-    <form>
+    <form method="post" action="{{base_path}}/tuoteluokat/lisaa">
         <div class="form-group">
             <label>Tuoteluokan nimi</label>
-            <input type="text" class="form-control">
+            <input type="text" name="name" class="form-control">
         </div>
         <div class="form-group">
             <button type="submit" class="btn btn-primary">Lisää tuoteluokka</button>
@@ -15,19 +24,12 @@
 
 <div style="margin-bottom: 50px">
     <h1>Poista tuoteluokka</h1>
-    <form>
-        <div class="form-group">
-            <label>Tuoteluokan nimi</label>
-            <div class="form-group">
-                <select class="form-control">
-                    <option>Urheilu</option>
-                    <option>Vapaa-aika</option>
-                </select>
-            </div>
-        </div>
-        <div class="form-group">
-            <button type="submit" class="btn btn-danger">Poista tuoteluokka</button>
-        </div>
+    {% for tuoteluokka in tuoteluokat %}
+    <form method="post" action="{{base_path}}/tuoteluokat/poista" class="form-inline" style="margin: 1% 1% 2% 0%">
+        {{tuoteluokka.nimi}}
+        <input type="hidden" name="id" value="{{tuoteluokka.id}}">
+        <button type="submit" class="btn btn-danger">Poista</button>
     </form>
+    {% endfor %}
 </div>
 {% endblock %}

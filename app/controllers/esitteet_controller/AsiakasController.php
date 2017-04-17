@@ -20,4 +20,9 @@ class AsiakasController extends BaseController {
         }
     }
 
+    public static function logout() {
+        $_SESSION['asiakas'] = null;
+        Redirect::to('/login', array('message' => 'Olet kirjautunut ulos!'));
+    }
+
 }

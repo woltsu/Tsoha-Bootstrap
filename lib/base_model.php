@@ -63,5 +63,13 @@ class BaseModel {
             return 'Sulkeutumisajan tulee olla päivämäärä!';
         }
     }
+    
+    public function validate_summa() {
+        if (!is_numeric($this->summa)) {
+            return 'Summan tulee olla numero!';
+        } else if ($this->summa < 0) {
+            return 'Summan tulee olla positiivinen!';
+        }
+    }
 
 }

@@ -25,9 +25,10 @@ CREATE TABLE Esite(
 );
 -- 
 CREATE TABLE Tarjous(
-  asiakas_id INTEGER REFERENCES Asiakas(id),
-  seurantalista_id INTEGER REFERENCES Seurantalista(id),
-  esite_id INTEGER REFERENCES Esite(id),
+  id SERIAL PRIMARY KEY,
+  asiakas_id INTEGER REFERENCES Asiakas(id) ON DELETE CASCADE,
+--   seurantalista_id INTEGER REFERENCES Seurantalista(id) ON DELETE CASCADE,
+  esite_id INTEGER REFERENCES Esite(id) ON DELETE CASCADE,
   summa numeric NOT NULL,
   pvm timestamp
 );
@@ -38,6 +39,6 @@ CREATE TABLE Tuoteluokka(
 );
 -- 
 CREATE TABLE EsitteenTuoteluokka(
-  esite_id INTEGER REFERENCES Esite(id),
-  tuoteluokka_id INTEGER REFERENCES Tuoteluokka(id)
+  esite_id INTEGER REFERENCES Esite(id) ON DELETE CASCADE,
+  tuoteluokka_id INTEGER REFERENCES Tuoteluokka(id) ON DELETE CASCADE
 );

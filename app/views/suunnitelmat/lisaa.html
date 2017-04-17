@@ -1,6 +1,5 @@
 {% extends "base.html" %}
 {% block content %}
-{% if user_logged_in.onkoAdmin %}
 <div>
     <h1>Lisää tuote</h1>
 
@@ -17,30 +16,31 @@
     <form method="post" action="{{base_path}}/esitteet">
         <div class="form-group">
             <label>Nimi</label>
-            <input type="text" name="name" class="form-control">
+            <input type="text" name="name" class="form-control" value="{{attributes.nimi}}">
         </div>
         <div>
             <label>Tuoteluokka</label>
             <div class="form-group form-inline">
-                <select name="class" class="form-control">
-                    <option>Urheilu</option>
-                    <option>Vapaa-aika</option>
+                <select class="form-control" name="tuoteluokat[]" multiple="">
+                    {% for tuoteluokka in tuoteluokat %}
+                    <option value="{{tuoteluokka.id}}">{{tuoteluokka.nimi}}</option>
+                    {% endfor %}
                 </select>
             </div>
             <p class="help-block">Ei tee vielä mitään hyödyllistä.</p>
         </div>
         <div class="form-group">
             <label>Lähtöhinta</label>
-            <input type="text" name="startPrice" class="form-control">
+            <input type="text" name="startPrice" class="form-control" value="{{attributes.aloitushinta}}">
         </div>
         <div class="form-group">
             <label>Sulkeutuu</label>
-            <input type="datetime" name="ends" class="form-control">
+            <input type="datetime" name="ends" class="form-control" value="{{attributes.sulkeutuu}}">
             <p class="help-block">pp.kk.vv</p>
         </div>
         <div class="form-group">
             <label>Kuvaus</label>
-            <textarea name="description" class="form-control"></textarea>
+            <textarea name="description" class="form-control" value="{{attributes.kuvaus}}"></textarea>
         </div>
         <div class="form-group">
             <label for="exampleInputFile">Kuva</label>
@@ -52,5 +52,4 @@
         </div>
     </form>
 </div>
-{% endif %}
 {% endblock %}

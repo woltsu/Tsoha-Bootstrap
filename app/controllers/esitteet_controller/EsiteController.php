@@ -65,7 +65,7 @@ class EsiteController extends BaseController {
             
             Redirect::to('/esitteet/' . $esite->id, array('message' => 'Uusi tuote on lisätty valikoimaan!'));
         } else {
-            View::make('/suunnitelmat/lisaa.html', array('errors' => $errors, 'attributes' => $attributes));
+            View::make('/suunnitelmat/lisaa.html', array('errors' => $errors, 'attributes' => $attributes, 'tuoteluokat' => Tuoteluokka::all()));
         }
     }
 

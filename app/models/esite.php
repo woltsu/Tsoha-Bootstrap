@@ -57,4 +57,8 @@ class Esite extends BaseModel {
         $query->execute(array('id' => $this->id));
     }
     
+    public function __toString() {
+        return $this->nimi;
+    }
+    
 }

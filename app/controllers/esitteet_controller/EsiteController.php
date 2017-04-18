@@ -55,14 +55,14 @@ class EsiteController extends BaseController {
 
         if (count($errors) == 0) {
             $esite->save();
-            
+
             $tuoteluokat = $params['tuoteluokat'];
-            
+
             foreach ($tuoteluokat as $tuoteluokka) {
                 $esitteenTuoteluokka = new EsitteenTuoteluokka(array('esite_id' => $esite->id, 'tuoteluokka_id' => $tuoteluokka));
                 $esitteenTuoteluokka->save();
             }
-            
+
             Redirect::to('/esitteet/' . $esite->id, array('message' => 'Uusi tuote on lisätty valikoimaan!'));
         } else {
             View::make('/suunnitelmat/lisaa.html', array('errors' => $errors, 'attributes' => $attributes, 'tuoteluokat' => Tuoteluokka::all()));
@@ -72,14 +72,26 @@ class EsiteController extends BaseController {
     public static function lisaaTuoteluokka() {
         $params = $_POST;
 
-        $valinnat = $params['tuoteluokat'];
-        $testi = array();
+        try {
+            $valitutTuoteluokat = $params['tuoteluokat'];
+        } catch (Exception $e) {
+            EsiteController::index();
+        }
+        
+        $valinnat = array();
 
-        foreach ($valinnat as $valinta) {
-            $testi[] = Tuoteluokka::hae($valinta);
+        $esitteet = array();
+
+        foreach ($valitutTuoteluokat as $tuoteluokka) {
+            $valinnat[] = Tuoteluokka::hae($tuoteluokka);
+            $esitteet = array_merge($esitteet, EsitteenTuoteluokka::haeEsitteetTuoteluokanPerusteella($tuoteluokka));
         }
 
-        Redirect::to('/esitteet', array('valinnat' => $testi));
+        $esitteet = array_unique($esitteet);
+
+        $tuoteluokat = Tuoteluokka::all();
+        //Redirect::to('/esitteet');
+        View::make("suunnitelmat/product_list.html", array('esitteet' => $esitteet, 'tuoteluokat' => $tuoteluokat, 'valinnat' => $valinnat));
     }
 
 }

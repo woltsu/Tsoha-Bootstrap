@@ -66,7 +66,7 @@ $routes->post('/logout', function() {
     AsiakasController::logout();
 });
 
-$routes->post('/lisaaTuoteluokka', function() {
+$routes->post('/esitteet/', function() {
     EsiteController::lisaaTuoteluokka();
 });
 

@@ -18,7 +18,7 @@
             </tbody>
         </table>
 
-        <form class="form-inline" method="post" action="{{base_path}}/lisaaTuoteluokka">
+        <form class="form-inline" method="post" action="{{base_path}}/esitteet/">
             <select class="form-control" name="tuoteluokat[]" multiple="">
                 {% for tuoteluokka in tuoteluokat %}
                 <option value="{{tuoteluokka.id}}">{{tuoteluokka.nimi}}</option>

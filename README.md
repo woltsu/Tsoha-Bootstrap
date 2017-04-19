@@ -10,11 +10,11 @@ Yleisiä linkkejä:
 
 [Aihe](http://advancedkittenry.github.io/suunnittelu_ja_tyoymparisto/aiheet/Huutokauppa.html) 
 
-## Eri sivuja
+## Eri sivuja (jos tähti niin pitää olla kirjautunut adminina)
 [Etusivu](http://wolli.users.cs.helsinki.fi/huuto/)  
 [Listaus](http://wolli.users.cs.helsinki.fi/huuto/esitteet)  
-[Lisäys](http://wolli.users.cs.helsinki.fi/huuto/esitteet/lisaa)  
+[Lisäys](http://wolli.users.cs.helsinki.fi/huuto/esitteet/lisaa)*    
 [Yksittäinen tuote](http://wolli.users.cs.helsinki.fi/huuto/esitteet/4)  
-[Tuotteen muokkaus](http://wolli.users.cs.helsinki.fi/huuto/esitteet/4/muokkaa)  
-[Tuoteluokkien muokkaus](http://wolli.users.cs.helsinki.fi/huuto/tuoteluokat)  
-[Tuotteen tarjoukset](http://wolli.users.cs.helsinki.fi/huuto/esitteet/4/tarjoukset) 
+[Tuotteen muokkaus](http://wolli.users.cs.helsinki.fi/huuto/esitteet/4/muokkaa)*      
+[Tuoteluokkien muokkaus](http://wolli.users.cs.helsinki.fi/huuto/tuoteluokat)*  
+[Tuotteen tarjoukset](http://wolli.users.cs.helsinki.fi/huuto/esitteet/4/tarjoukset)*   

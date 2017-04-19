@@ -5,19 +5,19 @@ class EsiteController extends BaseController {
     public static function index() {
         $esitteet = Esite::all();
         $tuoteluokat = Tuoteluokka::all();
-        View::make("suunnitelmat/product_list.html", array('esitteet' => $esitteet, 'tuoteluokat' => $tuoteluokat));
+        View::make("esite/product_list.html", array('esitteet' => $esitteet, 'tuoteluokat' => $tuoteluokat));
     }
 
     public static function show($id) {
         $esite = Esite::find($id);
         $suurinTarjous = Tarjous::suurin($id);
-        View::make("suunnitelmat/product_show.html", array('esite' => $esite, 'suurin' => $suurinTarjous));
+        View::make("esite/product_show.html", array('esite' => $esite, 'suurin' => $suurinTarjous));
     }
 
     public static function muokkaa($id) {
         self::check_admin();
         $esite = Esite::find($id);
-        View::make("suunnitelmat/product_edit.html", array('esite' => $esite));
+        View::make("esite/product_edit.html", array('esite' => $esite));
     }
 
     public static function paivita($id) {
@@ -30,7 +30,7 @@ class EsiteController extends BaseController {
             $esite->update($id);
             Redirect::to('/esitteet/' . $id, array('message' => 'Esitettä on muokattu onnistuneesti!'));
         } else {
-            View::make("suunnitelmat/product_edit.html", array('esite' => Esite::find($id), 'errors' => $errors, 'attributes' => $attributes));
+            View::make("esite/product_edit.html", array('esite' => Esite::find($id), 'errors' => $errors, 'attributes' => $attributes));
         }
     }
 
@@ -44,7 +44,7 @@ class EsiteController extends BaseController {
     public static function lisaa() {
         self::check_admin();
         $tuoteluokat = Tuoteluokka::all();
-        View::make("suunnitelmat/lisaa.html", array('tuoteluokat' => $tuoteluokat));
+        View::make("esite/product_add.html", array('tuoteluokat' => $tuoteluokat));
     }
 
     public static function store() {
@@ -55,17 +55,20 @@ class EsiteController extends BaseController {
 
         if (count($errors) == 0) {
             $esite->save();
-
-            $tuoteluokat = $params['tuoteluokat'];
-
-            foreach ($tuoteluokat as $tuoteluokka) {
-                $esitteenTuoteluokka = new EsitteenTuoteluokka(array('esite_id' => $esite->id, 'tuoteluokka_id' => $tuoteluokka));
-                $esitteenTuoteluokka->save();
+            
+            try {
+                $tuoteluokat = $params['tuoteluokat'];
+                foreach ($tuoteluokat as $tuoteluokka) {
+                    $esitteenTuoteluokka = new EsitteenTuoteluokka(array('esite_id' => $esite->id, 'tuoteluokka_id' => $tuoteluokka));
+                    $esitteenTuoteluokka->save();
+                }
+            } catch (Exception $e) {
+                
             }
 
             Redirect::to('/esitteet/' . $esite->id, array('message' => 'Uusi tuote on lisätty valikoimaan!'));
         } else {
-            View::make('/suunnitelmat/lisaa.html', array('errors' => $errors, 'attributes' => $attributes, 'tuoteluokat' => Tuoteluokka::all()));
+            View::make('/esite/product_add.html', array('errors' => $errors, 'attributes' => $attributes, 'tuoteluokat' => Tuoteluokka::all()));
         }
     }
 
@@ -77,7 +80,7 @@ class EsiteController extends BaseController {
         } catch (Exception $e) {
             EsiteController::index();
         }
-        
+
         $valinnat = array();
 
         $esitteet = array();
@@ -91,7 +94,7 @@ class EsiteController extends BaseController {
 
         $tuoteluokat = Tuoteluokka::all();
         //Redirect::to('/esitteet');
-        View::make("suunnitelmat/product_list.html", array('esitteet' => $esitteet, 'tuoteluokat' => $tuoteluokat, 'valinnat' => $valinnat));
+        View::make("esite/product_list.html", array('esitteet' => $esitteet, 'tuoteluokat' => $tuoteluokat, 'valinnat' => $valinnat));
     }
 
 }

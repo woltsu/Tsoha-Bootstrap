@@ -1,14 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
 
-{% if message %}
-<div class="alert alert-success">
-    <ul>
-        <li>{{message}}</li>
-    </ul>
-</div>
-{% endif %}
-
 <div style="margin-bottom: 50px">
     <h1>Lisää tuoteluokka</h1>
     <form method="post" action="{{base_path}}/tuoteluokat/lisaa">

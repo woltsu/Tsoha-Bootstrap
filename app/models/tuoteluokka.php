@@ -6,6 +6,7 @@ class Tuoteluokka extends BaseModel {
 
     public function __construct($attributes = null) {
         parent::__construct($attributes);
+        $this->validators = array('validate_name');
     }
 
     public static function all() {
@@ -37,7 +38,7 @@ class Tuoteluokka extends BaseModel {
         $query = DB::connection()->prepare('DELETE FROM Tuoteluokka WHERE id = :id');
         $query->execute(array('id' => $this->id));
     }
-    
+
     public function save() {
         $query = DB::connection()->prepare('INSERT INTO Tuoteluokka(nimi) VALUES (:name) RETURNING ID');
         $query->execute(array('name' => $this->nimi));

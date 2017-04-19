@@ -1,11 +1,6 @@
 {% extends "base.html" %}
 {% block content %}  
 
-{% if message %}
-<div class="alert alert-success">
-    {{message}}
-</div>
-{% endif %}
 <div style="">
     <div style="margin-bottom: 25px">
         <table class="table table-hover table-bordered table-striped">
@@ -30,7 +25,7 @@
                 {% endfor %}
             </select>
             <button type="submit" class="btn btn-success">+</button>
-            
+
             {% if user_logged_in.onkoAdmin %}
             <div style="margin-top: 2%;">
                 <a href="{{base_path}}/tuoteluokat" class="btn btn-success">Muokkaa tuoteluokkia</a>

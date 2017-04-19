@@ -5,7 +5,7 @@ class TarjousController extends BaseController {
     public static function show($esite_id) {
         self::check_admin();
         $tarjoukset = Tarjous::all($esite_id);
-        View::make("suunnitelmat/tarjoukset.html", array('tarjoukset' => $tarjoukset));
+        View::make("tarjoukset/tarjous_show.html", array('tarjoukset' => $tarjoukset));
     }
 
     public static function store($esite_id) {

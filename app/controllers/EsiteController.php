@@ -11,26 +11,46 @@ class EsiteController extends BaseController {
     public static function show($id) {
         $esite = Esite::find($id);
         $suurinTarjous = Tarjous::suurin($id);
-        View::make("esite/product_show.html", array('esite' => $esite, 'suurin' => $suurinTarjous));
+        $tuoteluokat = EsitteenTuoteluokka::haeTuoteluokatEsitteenPerusteella($id);
+        View::make("esite/product_show.html", array('esite' => $esite, 'suurin' => $suurinTarjous, 'tuoteluokat' => $tuoteluokat));
     }
 
     public static function muokkaa($id) {
         self::check_admin();
         $esite = Esite::find($id);
-        View::make("esite/product_edit.html", array('esite' => $esite));
+        $tuoteluokat = Tuoteluokka::all();
+        $esitteenTuoteluokat = EsitteenTuoteluokka::haeTuoteluokatEsitteenPerusteella($id);
+        View::make("esite/product_edit.html", array('esite' => $esite, 'tuoteluokat' => $tuoteluokat, 'esitteenTuoteluokat' => $esitteenTuoteluokat));
     }
 
     public static function paivita($id) {
         $params = $_POST;
-        $attributes = array('nimi' => $params['name'], 'kuva' => $params['picture'], 'aloitushinta' => $params['startPrice'], 'sulkeutuu' => $params['ends'], 'kuvaus' => $params['description']);
+
+        try {
+            $image = file_get_contents($_FILES['picture']['tmp_name']);
+            $image = '<img src="data:image/jpeg;base64,' . base64_encode($image) . '" height="400" width="600"/>';
+        } catch (Exception $e) {
+            $image = null;
+        }
+        $attributes = array('nimi' => $params['name'], 'kuva' => $image, 'aloitushinta' => $params['startPrice'], 'sulkeutuu' => $params['ends'], 'kuvaus' => $params['description']);
         $esite = new Esite($attributes);
         $errors = $esite->errors();
 
         if (count($errors) == 0) {
             $esite->update($id);
+            EsitteenTuoteluokka::destroy($id);
+            try {
+                $tuoteluokat = $params['tuoteluokat'];
+                foreach ($tuoteluokat as $tuoteluokka) {
+                    $esitteenTuoteluokka = new EsitteenTuoteluokka(array('esite_id' => $id, 'tuoteluokka_id' => $tuoteluokka));
+                    $esitteenTuoteluokka->save();
+                }
+            } catch (Exception $e) {
+                
+            }
             Redirect::to('/esitteet/' . $id, array('message' => 'Esitettä on muokattu onnistuneesti!'));
         } else {
-            View::make("esite/product_edit.html", array('esite' => Esite::find($id), 'errors' => $errors, 'attributes' => $attributes));
+            View::make("esite/product_edit.html", array('esite' => Esite::find($id), 'errors' => $errors, 'attributes' => $attributes, 'tuoteluokat' => Tuoteluokka::all()));
         }
     }
 
@@ -49,13 +69,24 @@ class EsiteController extends BaseController {
 
     public static function store() {
         $params = $_POST;
-        $attributes = array('nimi' => $params['name'], 'kuva' => $params['picture'], 'aloitushinta' => $params['startPrice'], 'sulkeutuu' => $params['ends'], 'kuvaus' => $params['description']);
+
+        try {
+            $image = file_get_contents($_FILES['picture']['tmp_name']);
+            $image = '<img src="data:image/jpeg;base64,' . base64_encode($image) . '" height="400" width="600"/>';
+        } catch (Exception $e) {
+            $image = null;
+        }
+
+//        echo '<img src="data:image/jpeg;base64,' . base64_encode($image) . '"/>';
+//        return;
+
+        $attributes = array('nimi' => $params['name'], 'kuva' => $image, 'aloitushinta' => $params['startPrice'], 'sulkeutuu' => $params['ends'], 'kuvaus' => $params['description']);
         $esite = new Esite($attributes);
         $errors = $esite->errors();
 
         if (count($errors) == 0) {
             $esite->save();
-            
+
             try {
                 $tuoteluokat = $params['tuoteluokat'];
                 foreach ($tuoteluokat as $tuoteluokka) {
@@ -82,19 +113,29 @@ class EsiteController extends BaseController {
         }
 
         $valinnat = array();
-
-        $esitteet = array();
+        $esitteet = Esite::all_ids();
 
         foreach ($valitutTuoteluokat as $tuoteluokka) {
+            $apu = array();
             $valinnat[] = Tuoteluokka::hae($tuoteluokka);
-            $esitteet = array_merge($esitteet, EsitteenTuoteluokka::haeEsitteetTuoteluokanPerusteella($tuoteluokka));
+            $uudetEsitteet = EsitteenTuoteluokka::haeEsitteetTuoteluokanPerusteella($tuoteluokka);
+            foreach ($esitteet as $esite) {
+                if (in_array($esite, $uudetEsitteet)) {
+                    $apu[] = $esite;
+                }
+            }
+            $esitteet = $apu;
+        }
+        $lopullinen = array();
+        foreach ($esitteet as $esite) {
+            $lopullinen[] = Esite::find($esite);
         }
 
-        $esitteet = array_unique($esitteet);
+        //$esitteet = array_unique($esitteet);
 
         $tuoteluokat = Tuoteluokka::all();
-        //Redirect::to('/esitteet');
-        View::make("esite/product_list.html", array('esitteet' => $esitteet, 'tuoteluokat' => $tuoteluokat, 'valinnat' => $valinnat));
+//Redirect::to('/esitteet');
+        View::make("esite/product_list.html", array('esitteet' => $lopullinen, 'tuoteluokat' => $tuoteluokat, 'valinnat' => $valinnat));
     }
 
 }

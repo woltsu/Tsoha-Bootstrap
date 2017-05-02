@@ -6,6 +6,7 @@ class Asiakas extends BaseModel {
 
     public function __construct($attributes = null) {
         parent::__construct($attributes);
+        $this->validators = array('validate_email', 'validate_puh', 'validate_password', 'validate_etunimi', 'validate_sukunimi');
     }
 
 //    public static function all() {
@@ -48,6 +49,13 @@ class Asiakas extends BaseModel {
                 'etunimi' => $row['etunimi'], 'sukunimi' => $row['sukunimi'], 'password' => $row['password'],
                 'onkoAdmin' => $row['onkoadmin']));
         }
+    }
+
+    public function save() {
+        $query = DB::connection()->prepare("INSERT INTO Asiakas(email, puh, etunimi, sukunimi, password, onkoAdmin) VALUES (:email, :puh, :etunimi, :sukunimi, :password, '0') RETURNING ID");
+        $query->execute(array('email' => $this->email, 'puh' => $this->puh, 'etunimi' => $this->etunimi, 'sukunimi' => $this->sukunimi, 'password' => $this->password));
+        $row = $query->fetch();
+        $this->id = $row['id'];
     }
 
 }

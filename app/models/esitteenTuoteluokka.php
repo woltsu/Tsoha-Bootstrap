@@ -14,18 +14,35 @@ class EsitteenTuoteluokka extends BaseModel {
     }
     
     public static function haeEsitteetTuoteluokanPerusteella($tuoteluokka_id) {
-        $query = DB::connection()->prepare('SELECT Esite.id, Esite.nimi, Esite.kuva, Esite.aloitusHinta, Esite.avattu, Esite.sulkeutuu, Esite.kuvaus FROM Esite INNER JOIN EsitteenTuoteluokka ON EsitteenTuoteluokka.esite_id = Esite.id AND EsitteenTuoteluokka.tuoteluokka_id = :id');
+        $query = DB::connection()->prepare('SELECT Esite.id FROM Esite INNER JOIN EsitteenTuoteluokka ON EsitteenTuoteluokka.esite_id = Esite.id AND EsitteenTuoteluokka.tuoteluokka_id = :id');
         $query->execute(array('id' => $tuoteluokka_id));
         $rows = $query->fetchAll();
         $esitteet = array();
         
         foreach ($rows as $row) {
-            $esitteet[] = new Esite(array('id' => $row['id'], 'nimi' => $row['nimi'], 'kuva' => $row['kuva'],
-                'aloitushinta' => $row['aloitushinta'], 'avattu' => $row['avattu'],
-                'sulkeutuu' => $row['sulkeutuu'], 'kuvaus' => $row['kuvaus']));
+            $esitteet[] = $row['id'];
         }
         
         return $esitteet;
+    }
+    
+    public static function haeTuoteluokatEsitteenPerusteella($esite_id) {
+        $query = DB::connection()->prepare('SELECT Tuoteluokka.id, Tuoteluokka.nimi FROM Tuoteluokka INNER JOIN EsitteenTuoteluokka ON EsitteenTuoteluokka.tuoteluokka_id = Tuoteluokka.id AND EsitteenTuoteluokka.esite_id = :id');
+        $query->execute(array('id' => $esite_id));
+        $rows = $query->fetchAll();
+        $tuoteluokat = array();
+        
+        foreach ($rows as $row) {
+            $tuoteluokat[] = new Esite(array('id' => $row['id'], 'nimi' => $row['nimi']));
+        }
+        
+        return $tuoteluokat;
+    }
+
+
+    public static function destroy($esite_id) {
+        $query = DB::connection()->prepare('DELETE FROM EsitteenTuoteluokka WHERE esite_id = :id');
+        $query->execute(array('id' => $esite_id));
     }
     
 }

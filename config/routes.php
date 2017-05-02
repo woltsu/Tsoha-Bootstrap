@@ -1,7 +1,7 @@
 <?php
 
 $routes->get('/', function() {
-    AsiakasController::etusivu();
+    YleisController::etusivu();
 });
 
 $routes->get('/hiekkalaatikko', function() {
@@ -55,15 +55,23 @@ $routes->get('/tuoteluokat', function() {
 
 $routes->get('/login', function() {
     // Kirjautumislomakkeen esittäminen
-    AsiakasController::login();
+    YleisController::login();
 });
 $routes->post('/login', function() {
     // Kirjautumisen käsittely
-    AsiakasController::handle_login();
+    YleisController::handle_login();
 });
 
 $routes->post('/logout', function() {
-    AsiakasController::logout();
+    YleisController::logout();
+});
+
+$routes->get('/register', function() {
+    YleisController::register();
+});
+
+$routes->post('/register', function() {
+    YleisController::handle_register();
 });
 
 $routes->post('/esitteet/', function() {

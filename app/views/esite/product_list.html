@@ -24,13 +24,19 @@
                 <option value="{{tuoteluokka.id}}">{{tuoteluokka.nimi}}</option>
                 {% endfor %}
             </select>
-            <button type="submit" class="btn btn-success">+</button>
+            <button type="submit" class="btn btn-success"><i class="fa fa-plus" aria-hidden="true"></i></button>
+            <br>
 
             {% if user_logged_in.onkoAdmin %}
-            <div style="margin-top: 2%;">
-                <a href="{{base_path}}/tuoteluokat" class="btn btn-success">Muokkaa tuoteluokkia</a>
-            </div>
+            <a href="{{base_path}}/tuoteluokat" class="btn btn-default">Muokkaa tuoteluokkia</a>
             {% endif %}
+
+            <div style="margin-top: 2%">
+                {% if user_logged_in.onkoAdmin %}
+                <a href="{{base_path}}/esitteet/lisaa" class="btn btn-default">Lisää esite</a>
+                {% endif %}
+            </div>
+
         </form>
     </div>
 </div>
@@ -39,48 +45,19 @@
 
 {% for esite in esitteet %}
 
-<div style="width: 70%;
+<div style="width: 600px; height: 480px;
      background-color: white;
      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
      margin-bottom: 25px;">
 
-    <a href="{{base_path}}/esitteet/{{esite.id}}">Kuva: {{esite.kuva}}</a>
+    <a href="{{base_path}}/esitteet/{{esite.id}}">{{esite.showImage}}</a>
     <div style="text-align: center;
          padding: 10px 20px;">
-        <a href="{{base_path}}/esitteet/{{esite.id}}"><p>{{esite.nimi}}</p></a>
+        <p>{{esite.nimi}}</p>
         <label>Sulkeutuu: {{esite.sulkeutuu}}</label>
     </div>
 </div>
 
 {% endfor %}
-
-{% if user_logged_in.onkoAdmin %}
-<a href="{{base_path}}/esitteet/lisaa" class="btn btn-success">Lisää esite</a>
-{% endif %}
-
-
-<!--<div style="width: 70%;
-     background-color: white;
-     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-     margin-bottom: 25px;">
-
-    <a href="urheilu/1"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Soccer_ball_on_ground.jpg/1280px-Soccer_ball_on_ground.jpg" alt="pallo" style="max-width: 100%"></a>
-    <div style="text-align: center;
-         padding: 10px 20px;">
-        <p>Pallo</p>
-    </div>
-</div>-->
-
-<!--<div style="width: 70%;
-     background-color: white;
-     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-     margin-bottom: 25px;">
-
-    <a href="#"><img src="https://static.pexels.com/photos/54334/running-shoe-shoe-brooks-highly-functional-54334.jpeg" alt="lenkkarit" style="max-width: 100%"></a>
-    <div style="text-align: center;
-         padding: 10px 20px;">
-        <p>Lenkkarit</p>
-    </div>
-</div>-->
 
 {% endblock %}

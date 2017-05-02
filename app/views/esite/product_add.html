@@ -3,7 +3,7 @@
 <div>
     <h1>Lisää tuote</h1>
 
-    <form method="post" action="{{base_path}}/esitteet">
+    <form method="post" action="{{base_path}}/esitteet" enctype="multipart/form-data">
         <div class="form-group">
             <label>Nimi</label>
             <input type="text" name="name" class="form-control" value="{{attributes.nimi}}">
@@ -32,9 +32,8 @@
             <textarea name="description" class="form-control" value="{{attributes.kuvaus}}"></textarea>
         </div>
         <div class="form-group">
-            <label for="exampleInputFile">Kuva</label>
-            <input type="file" name="picture" id="exampleInputFile">
-            <p class="help-block">Ei näy vielä kunnolla.</p>
+            <label>Kuva</label>
+            <input type="file" name="picture" id="picture">
         </div>
         <div class="form-group">
             <button type="submit" class="btn btn-primary">Lisää tuote</button>

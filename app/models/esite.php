@@ -23,7 +23,20 @@ class Esite extends BaseModel {
 
         return $esitteet;
     }
+    
+    public static function all_ids() {
+        $query = DB::connection()->prepare('SELECT * FROM Esite');
+        $query->execute();
+        $rows = $query->fetchAll();
+        $esitteet = array();
+        
+        foreach ($rows as $row) {
+            $esitteet[] = $row['id'];
+        }
 
+        return $esitteet;
+    }
+    
     public static function find($id) {
         $query = DB::connection()->prepare('SELECT * FROM Esite WHERE id = :id LIMIT 1');
         $query->execute(array('id' => $id));
@@ -56,9 +69,13 @@ class Esite extends BaseModel {
         $query = DB::connection()->prepare('DELETE FROM Esite WHERE id = :id');
         $query->execute(array('id' => $this->id));
     }
-    
+
     public function __toString() {
         return $this->nimi;
     }
     
+    public function showImage() {
+        echo $this->kuva;
+    }
+
 }

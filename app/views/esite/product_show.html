@@ -2,12 +2,20 @@
 {% block content %}  
 
 <h1>{{esite.nimi}}</h1>
-<label>Kuva: {{esite.kuva}}</label>
+<label>
+    {{esite.showImage}}
+</label>
 <ul>
     <li><strong>Lisätty:</strong>{{esite.avattu}}</li>
     <li><strong>Sulkeutuu:</strong>{{esite.sulkeutuu}}</li>
     <li><strong>Lähtöhinta:</strong>{{esite.aloitushinta}} €</li>
     <li><strong>Suurin tarjous:</strong>{{suurin.summa}} €</li>
+    <div style="margin-top: 1%;">
+        <label>Tuoteluokat: </label>
+        {% for tuoteluokka in tuoteluokat %}
+        <li>{{tuoteluokka.nimi}}</li>
+        {% endfor %}
+    </div>
 </ul>
 
 <label>Kuvaus</label>
@@ -17,12 +25,11 @@
     <form method="post" action="{{base_path}}/esitteet/{{esite.id}}" class="form-inline">
         <div class="form-group">
             <div class="input-group">
-                <div class="input-group-addon">€</div>
+                <div class="input-group-addon"><i class="fa fa-eur" aria-hidden="true"></i></div>
                 <input name="summa" type="text" class="form-control" id="exampleInputAmount" placeholder="Summa">
-                <div class="input-group-addon">.00</div>
             </div>
         </div>
-        <button type="submit" class="btn btn-primary">Tarjoa</button>
+        <button type="submit" class="btn btn-primary"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
     </form>
 </div>
 

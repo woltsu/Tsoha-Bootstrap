@@ -9,28 +9,44 @@
         {{forms.destroy_button("#{base_path}/esitteet/#{esite.id}/destroy")}}
     </div>
 
-    <form method="post" action="{{base_path}}/esitteet/{{esite.id}}/muokkaa">
+    <form method="post" action="{{base_path}}/esitteet/{{esite.id}}/muokkaa" enctype="multipart/form-data">
         <div class="form-group">
             <label>Nimi</label>
-            <input type="text" name="name" class="form-control">
+            <input type="text" name="name" class="form-control" value="{{esite.nimi}}">
+        </div>
+        <div>
+            <label>Tuoteluokka</label>
+            <div class="form-group form-inline">
+                <select class="form-control" name="tuoteluokat[]" multiple="">
+                    {% for tuoteluokka in tuoteluokat %}
+                    <option value="{{tuoteluokka.id}}">{{tuoteluokka.nimi}}</option>
+                    {% endfor %}
+                </select>
+                
+                <div class="help-block">
+                    Vanhat tuoteluokat: 
+                    {% for tuoteluokka in esitteenTuoteluokat %}
+                    <li>{{tuoteluokka.nimi}}</li>
+                    {% endfor %}
+                </div>
+            </div>
         </div>
         <div class="form-group">
             <label>Lähtöhinta</label>
-            <input type="text" name="startPrice" class="form-control">
+            <input type="text" name="startPrice" class="form-control" value="{{esite.aloitushinta}}">
         </div>
         <div class="form-group">
             <label>Sulkeutuu</label>
-            <input type="datetime" name="ends" class="form-control">
+            <input type="datetime" name="ends" class="form-control" value="{{esite.sulkeutuu}}">
             <p class="help-block">pp.kk.vv</p>
         </div>
         <div class="form-group">
             <label>Kuvaus</label>
-            <textarea name="description" class="form-control"></textarea>
+            <textarea name="description" class="form-control">{{esite.kuvaus}}</textarea>
         </div>
         <div class="form-group">
             <label for="exampleInputFile">Kuva</label>
-            <input type="file" name="picture" id="exampleInputFile">
-            <p class="help-block">Ei näy vielä kunnolla.</p>
+            <input type="file" name="picture" id="picture">
         </div>
         <div class="form-group">
             <button type="submit" class="btn btn-success">Päivitä</button>

@@ -37,6 +37,8 @@ class BaseModel {
         }
         if (strlen($this->nimi) < 3) {
             return 'Nimen pituuden tulee olla vähintään kolme merkkiä!';
+        } else if (strlen($this->nimi) > 40) {
+            return 'Nimi liian pitkä!';
         }
     }
 
@@ -46,6 +48,8 @@ class BaseModel {
         }
         if (strlen($this->kuvaus) < 3) {
             return 'Kuvauksen pituuden tulee olla vähintään kolme merkkiä!';
+        } else if (strlen($this->kuvaus) > 500) {
+            return 'Kuvaus liian pitkä!';
         }
     }
 
@@ -56,10 +60,18 @@ class BaseModel {
     }
 
     public function validate_sulkeutuu() {
+        if ($this->sulkeutuu == '' || $this->sulkeutuu == null) {
+            return 'Sulkeutumisaika ei saa olla tyhjä!';
+        } else if (!preg_match("/^[0-9]{2}.[0-9]{2}.[0-9]{4}$/", $this->sulkeutuu)) {
+            return 'Tarkista, että sulkeutumisaika on oikeassa formaatissa';
+        }
 
-        try {
-            new DateTime('@' . $this->sulkeutuu);
-        } catch (Exception $e) {
+        $osat = explode(".", $this->sulkeutuu);
+        $paiva = $osat[0];
+        $kuukausi = $osat[1];
+        $vuosi = $osat[2];
+
+        if (!checkdate($kuukausi, $paiva, $vuosi)) {
             return 'Sulkeutumisajan tulee olla päivämäärä!';
         }
     }
@@ -77,6 +89,8 @@ class BaseModel {
             return 'Sähköposti ei saa olla tyhjä!';
         } else if (!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
             return 'Tarkista, että sähköposti on oikeassa formaatissa';
+        } else if (strlen($this->email) > 120) {
+            return 'Sähköposti liian pitkä!';
         }
     }
 
@@ -93,6 +107,8 @@ class BaseModel {
             return 'Salasana ei saa olla tyhjä!';
         } else if (strlen($this->password) < 3) {
             return 'Salasanan pituuden tulee olla vähintään kolme merkkiä!';
+        } else if (strlen($this->password) > 50) {
+            return 'Salasana liian pitkä!';
         }
     }
 
@@ -101,6 +117,8 @@ class BaseModel {
             return 'Etunimi ei saa olla tyhjä!';
         } else if (strlen($this->etunimi) < 2) {
             return 'Etunimen pituuden tulee olla vähintään kaksi merkkiä!';
+        } else if (strlen($this->etunimi) > 40) {
+            return 'Etunimi liian pitkä!';
         }
     }
 
@@ -109,6 +127,8 @@ class BaseModel {
             return 'Sukunimi ei saa olla tyhjä!';
         } else if (strlen($this->sukunimi) < 2) {
             return 'Sukunimen pituuden tulee olla vähintään kaksi merkkiä';
+        } else if (strlen($this->sukunimi) > 40) {
+            return 'Sukunimi liian pitkä!';
         }
     }
 

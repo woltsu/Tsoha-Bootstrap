@@ -16,7 +16,7 @@ $routes->get('/esitteet', function() {
     EsiteController::index();
 });
 
-$routes->post('/esitteet', function() {
+$routes->post('/esitteet/lisaaEsite', function() {
     EsiteController::store();
 });
 

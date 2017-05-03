@@ -77,5 +77,13 @@ class Esite extends BaseModel {
     public function showImage() {
         echo $this->kuva;
     }
+    
+    public function getHighestBid() {
+        $bid = Tarjous::suurin($this->id);
+        if ($bid->summa == 0) {
+            return $this->aloitushinta;
+        }
+        return $bid->summa;
+    }
 
 }

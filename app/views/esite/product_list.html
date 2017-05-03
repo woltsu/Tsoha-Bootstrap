@@ -1,12 +1,14 @@
 {% extends "base.html" %}
 {% block content %}  
 
-<div style="">
+<div style="display: block;
+     margin-left: auto;
+     margin-right: auto; text-align: center">
     <div style="margin-bottom: 25px">
-        <table class="table table-hover table-bordered table-striped">
+        <table class="table table-hover table-bordered" style="background: white;">
             <thead>
                 <tr>
-                    <th>Luokat</th>
+                    <th class="text-center">Luokat</th>
                 </tr>
             </thead>
             <tbody>
@@ -18,13 +20,13 @@
             </tbody>
         </table>
 
-        <form class="form-inline" method="post" action="{{base_path}}/esitteet/">
+        <form class="form-inline" method="post" action="{{base_path}}/esitteet" style="">
             <select class="form-control" name="tuoteluokat[]" multiple="">
                 {% for tuoteluokka in tuoteluokat %}
                 <option value="{{tuoteluokka.id}}">{{tuoteluokka.nimi}}</option>
                 {% endfor %}
             </select>
-            <button type="submit" class="btn btn-success"><i class="fa fa-plus" aria-hidden="true"></i></button>
+            <button type="submit" class="btn btn-default"><i class="fa fa-plus" aria-hidden="true"></i></button>
             <br>
 
             {% if user_logged_in.onkoAdmin %}
@@ -44,17 +46,22 @@
 
 
 {% for esite in esitteet %}
+<div class="container" style="width: 80%; height: 70%">
+    <div class="text-center" style="display: block;
+         margin-left: auto;
+         margin-right: auto; max-height: 60%; max-width: 80%;
+         background-color: white;
+         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+         margin-bottom: 25px;">
 
-<div style="width: 600px; height: 480px;
-     background-color: white;
-     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-     margin-bottom: 25px;">
-
-    <a href="{{base_path}}/esitteet/{{esite.id}}">{{esite.showImage}}</a>
-    <div style="text-align: center;
-         padding: 10px 20px;">
-        <p>{{esite.nimi}}</p>
-        <label>Sulkeutuu: {{esite.sulkeutuu}}</label>
+        <a href="{{base_path}}/esitteet/{{esite.id}}">{{esite.showImage}}</a>
+        <div style="text-align: center;
+             padding: 2% 2%;">
+            <p>{{esite.nimi}}</p>
+            <label>Sulkeutuu: {{esite.sulkeutuu}}</label>
+            <br>
+            <label>Hinta: {{esite.getHighestBid}}</label>
+        </div>
     </div>
 </div>
 

@@ -9,10 +9,10 @@ CREATE TABLE Asiakas(
   onkoAdmin boolean NOT NULL
 );
 -- 
-CREATE TABLE Seurantalista(
-  id SERIAL PRIMARY KEY,
-  pvm timestamp
-);
+-- CREATE TABLE Seurantalista(
+--   id SERIAL PRIMARY KEY,
+--   pvm timestamp
+-- );
 -- 
 CREATE TABLE Esite(
   id SERIAL PRIMARY KEY,

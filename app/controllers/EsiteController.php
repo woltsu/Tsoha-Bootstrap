@@ -9,7 +9,11 @@ class EsiteController extends BaseController {
     }
 
     public static function show($id) {
+        try {
         $esite = Esite::find($id);
+        } catch (Exception $e) {
+            Redirect::to('/esitteet');
+        }
         $suurinTarjous = Tarjous::suurin($id);
         $tuoteluokat = EsitteenTuoteluokka::haeTuoteluokatEsitteenPerusteella($id);
         View::make("esite/product_show.html", array('esite' => $esite, 'suurin' => $suurinTarjous, 'tuoteluokat' => $tuoteluokat));
@@ -72,7 +76,7 @@ class EsiteController extends BaseController {
 
         try {
             $image = file_get_contents($_FILES['picture']['tmp_name']);
-            $image = '<img src="data:image/jpeg;base64,' . base64_encode($image) . '" height="400" width="600"/>';
+            $image = '<img src="data:image/jpeg;base64,' . base64_encode($image) . '" style="max-width: 100%; height: auto;"/>';
         } catch (Exception $e) {
             $image = null;
         }
@@ -134,7 +138,6 @@ class EsiteController extends BaseController {
         //$esitteet = array_unique($esitteet);
 
         $tuoteluokat = Tuoteluokka::all();
-//Redirect::to('/esitteet');
         View::make("esite/product_list.html", array('esitteet' => $lopullinen, 'tuoteluokat' => $tuoteluokat, 'valinnat' => $valinnat));
     }
 

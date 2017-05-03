@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1>Muokkaa tuoteluokkaa {{tuoteluokka.nimi}}</h1>
+<form method="post" action="{{base_path}}/tuoteluokat/{{tuoteluokka.id}}/destroy" class="form-inline" style="margin: 1% 1% 2% 0%">
+    <input type="hidden" name="id" value="{{tuoteluokka.id}}">
+    <button type="submit" class="btn btn-danger">Poista</button>
+</form>
+
+<form method="post" action="{{base_path}}/tuoteluokat/{{tuoteluokka.id}}/edit">
+    <div class="form-group">
+        <label>Uusi nimi</label>
+        <input type="text" name="name" class="form-control" value="{{tuoteluokka.nimi}}">
+        <input type="hidden" name="id" value="{{tuoteluokka.id}}">
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-success">Päivitä</button>
+    </div>
+</form>
+
+{% endblock %}

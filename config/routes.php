@@ -49,10 +49,6 @@ $routes->get('/esitteet/:id/tarjoukset', function($id) {
     TarjousController::show($id);
 });
 
-$routes->get('/tuoteluokat', function() {
-    TuoteluokkaController::index();
-});
-
 $routes->get('/login', function() {
     // Kirjautumislomakkeen esittäminen
     YleisController::login();
@@ -78,10 +74,24 @@ $routes->post('/esitteet/', function() {
     EsiteController::lisaaTuoteluokka();
 });
 
+$routes->get('/tuoteluokat', function() {
+    TuoteluokkaController::index();
+});
+
+$routes->get('/tuoteluokat/:id', function($id) {
+    TuoteluokkaController::edit($id);
+});
+
 $routes->post('/tuoteluokat/lisaa', function() {
     TuoteluokkaController::store();
 });
 
-$routes->post('/tuoteluokat/poista', function() {
-    TuoteluokkaController::destroy();
+$routes->post('/tuoteluokat/:id/destroy', function($id) {
+    TuoteluokkaController::destroy($id);
 });
+
+$routes->post('/tuoteluokat/:id/edit', function($id) {
+    TuoteluokkaController::update($id);
+});
+
+

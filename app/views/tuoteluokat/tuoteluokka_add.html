@@ -17,11 +17,17 @@
 <div style="margin-bottom: 50px">
     <h1>Poista tuoteluokka</h1>
     {% for tuoteluokka in tuoteluokat %}
-    <form method="post" action="{{base_path}}/tuoteluokat/poista" class="form-inline" style="margin: 1% 1% 2% 0%">
+    <!--    <form method="post" action="{{base_path}}/tuoteluokat/poista" class="form-inline" style="margin: 1% 1% 2% 0%">
+            {{tuoteluokka.nimi}}
+            <input type="hidden" name="id" value="{{tuoteluokka.id}}">
+            <button type="submit" class="btn btn-success">Poista</button>
+        </form>-->
+
+    <div style="margin-top: 2%">
         {{tuoteluokka.nimi}}
-        <input type="hidden" name="id" value="{{tuoteluokka.id}}">
-        <button type="submit" class="btn btn-danger">Poista</button>
-    </form>
+        <a href="{{base_path}}/tuoteluokat/{{tuoteluokka.id}}" class="btn btn-success">Muokkaa</a>
+        <br>
+    </div>
     {% endfor %}
 </div>
 {% endblock %}

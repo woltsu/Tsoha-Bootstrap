@@ -45,5 +45,10 @@ class Tuoteluokka extends BaseModel {
         $row = $query->fetch();
         $this->id = $row['id'];
     }
+    
+    public function update($id) {
+        $query = DB::connection()->prepare('UPDATE Tuoteluokka SET nimi = :name WHERE id = :id');
+        $query->execute(array('name' => $this->nimi, 'id' => $id));
+    }
 
 }

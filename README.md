@@ -8,7 +8,8 @@ Yleisiä linkkejä:
 
 ## Työn aihe
 
-[Aihe](http://advancedkittenry.github.io/suunnittelu_ja_tyoymparisto/aiheet/Huutokauppa.html) 
+Työn aihe on verkkohuutokauppa, johon huutokaupan ylläpitäjä voi lisätä tuotteitaan myyntiin. Tavalliset käyttäjät voivat
+rekisteröityä sovellukseen, minkä jälkeen he voivat tehdä tarjouksia tuotteista. Selailla voi tuotteita kuka tahansa. Tuotteita voidaan myös kategorisoida tiettyihin tuoteluokkiin.
 
 ## Eri sivuja (jos tähti niin pitää olla kirjautunut adminina)
 [Etusivu](http://wolli.users.cs.helsinki.fi/huuto/)  

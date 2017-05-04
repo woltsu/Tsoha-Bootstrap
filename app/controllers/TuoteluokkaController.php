@@ -15,6 +15,7 @@ class TuoteluokkaController extends BaseController {
     }
 
     public static function destroy($id) {
+        self::check_admin();
         $params = $_POST;
         $id = $params['id'];
         $tuoteluokka = new Tuoteluokka(array('id' => $id));
@@ -23,11 +24,10 @@ class TuoteluokkaController extends BaseController {
     }
 
     public static function update($id) {
+        self::check_admin();
         $params = $_POST;
         $tuoteluokka = new Tuoteluokka(array('nimi' => $params['name']));
-
         $errors = $tuoteluokka->errors();
-
         if (count($errors) == 0) {
             $tuoteluokka->update($id);
             Redirect::to('/tuoteluokat', array('message' => 'Tuoteluokkaa on muokattu onnistuneesti!'));
@@ -37,11 +37,10 @@ class TuoteluokkaController extends BaseController {
     }
 
     public static function store() {
+        self::check_admin();
         $params = $_POST;
         $tuoteluokka = new Tuoteluokka(array('nimi' => $params['name']));
-
         $errors = $tuoteluokka->errors();
-
         if (count($errors) == 0) {
             $tuoteluokka->save();
             Redirect::to('/tuoteluokat', array('message' => 'Tuoteluokka on lisätty onnistuneesti!'));

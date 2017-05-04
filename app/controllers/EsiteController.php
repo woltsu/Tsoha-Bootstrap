@@ -10,43 +10,42 @@ class EsiteController extends BaseController {
 
     public static function show($id) {
         try {
-        $esite = Esite::find($id);
+            $esite = Esite::find($id);
         } catch (Exception $e) {
             Redirect::to('/esitteet');
         }
         $suurinTarjous = Tarjous::suurin($id);
         $tuoteluokat = EsitteenTuoteluokka::haeTuoteluokatEsitteenPerusteella($id);
-        
+
         $sulkeutuu = $esite->getSulkeutuu();
         $avattu = $esite->getAvattu();
-        
+
         View::make("esite/product_show.html", array('esite' => $esite, 'suurin' => $suurinTarjous, 'tuoteluokat' => $tuoteluokat, 'sulkeutuu' => $sulkeutuu, 'avattu' => $avattu));
     }
-    
+
     public static function muokkaa($id) {
         self::check_admin();
         $esite = Esite::find($id);
         $tuoteluokat = Tuoteluokka::all();
         $esitteenTuoteluokat = EsitteenTuoteluokka::haeTuoteluokatEsitteenPerusteella($id);
-        
+
         $sulkeutuu = $esite->getSulkeutuu();
-        
+
         View::make("esite/product_edit.html", array('esite' => $esite, 'tuoteluokat' => $tuoteluokat, 'esitteenTuoteluokat' => $esitteenTuoteluokat, 'sulkeutuu' => $sulkeutuu));
     }
 
     public static function paivita($id) {
+        self::check_admin();
         $params = $_POST;
-
         try {
             $image = file_get_contents($_FILES['picture']['tmp_name']);
-            $image = '<img src="data:image/jpeg;base64,' . base64_encode($image) . '" height="400" width="600"/>';
+            $image = '<img src="data:image/jpeg;base64,' . base64_encode($image) . '" style="max-width: 100%; max-height: 100%""/>';
         } catch (Exception $e) {
             $image = Esite::find($id)->kuva;
         }
         $attributes = array('nimi' => $params['name'], 'kuva' => $image, 'aloitushinta' => $params['startPrice'], 'sulkeutuu' => $params['ends'], 'kuvaus' => $params['description']);
         $esite = new Esite($attributes);
         $errors = $esite->errors();
-
         if (count($errors) == 0) {
             $esite->update($id);
             EsitteenTuoteluokka::destroy($id);
@@ -79,25 +78,22 @@ class EsiteController extends BaseController {
     }
 
     public static function store() {
+        self::check_admin();
         $params = $_POST;
-
         try {
             $image = file_get_contents($_FILES['picture']['tmp_name']);
-            $image = '<img src="data:image/jpeg;base64,' . base64_encode($image) . '" style="max-width: 100%; height: auto;"/>';
+            $image = '<img src="data:image/jpeg;base64,' . base64_encode($image) . '" style="max-width: 100%; max-height: 100%""/>';
         } catch (Exception $e) {
             $image = null;
         }
-
 //        echo '<img src="data:image/jpeg;base64,' . base64_encode($image) . '"/>';
 //        return;
 
         $attributes = array('nimi' => $params['name'], 'kuva' => $image, 'aloitushinta' => $params['startPrice'], 'sulkeutuu' => $params['ends'], 'kuvaus' => $params['description']);
         $esite = new Esite($attributes);
         $errors = $esite->errors();
-
         if (count($errors) == 0) {
             $esite->save();
-
             try {
                 $tuoteluokat = $params['tuoteluokat'];
                 foreach ($tuoteluokat as $tuoteluokka) {
@@ -107,7 +103,6 @@ class EsiteController extends BaseController {
             } catch (Exception $e) {
                 
             }
-
             Redirect::to('/esitteet/' . $esite->id, array('message' => 'Uusi tuote on lisätty valikoimaan!'));
         } else {
             View::make('/esite/product_add.html', array('errors' => $errors, 'attributes' => $attributes, 'tuoteluokat' => Tuoteluokka::all()));

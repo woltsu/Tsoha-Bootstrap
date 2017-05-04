@@ -37,7 +37,7 @@
         </div>
         <div class="form-group">
             <label>Sulkeutuu</label>
-            <input type="datetime" name="ends" class="form-control" value="{{esite.sulkeutuu}}">
+            <input type="text" name="ends" class="form-control" value="{{sulkeutuu}}">
             <p class="help-block">pp.kk.vvvv</p>
         </div>
         <div class="form-group">
@@ -47,6 +47,7 @@
         <div class="form-group">
             <label for="exampleInputFile">Kuva</label>
             <input type="file" name="picture" id="picture">
+            <p class="help-block">Jos tyhjä, niin kuvaa ei muokata.</p>
         </div>
         <div class="form-group">
             <button type="submit" class="btn btn-success">Päivitä</button>

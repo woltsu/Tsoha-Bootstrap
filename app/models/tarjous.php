@@ -39,5 +39,9 @@ class Tarjous extends BaseModel {
         $row = $query->fetch();
         $this->id = $row['id'];
     }
-
+    
+    public function getPvm() {
+        return Esite::getCorrectDateFormat($this->pvm);
+    }
+    
 }

@@ -57,10 +57,11 @@
         <a href="{{base_path}}/esitteet/{{esite.id}}">{{esite.showImage}}</a>
         <div style="text-align: center;
              padding: 2% 2%;">
-            <p>{{esite.nimi}}</p>
-            <label>Sulkeutuu: {{esite.sulkeutuu}}</label>
+            <a href="{{base_path}}/esitteet/{{esite.id}}">{{esite.nimi}}</a>
             <br>
-            <label>Hinta: {{esite.getHighestBid}}</label>
+            <label>Sulkeutuu: {{esite.getSulkeutuu}}</label>
+            <br>
+            <label>Suurin tarjous: {{esite.getHighestBid}}€</label>
         </div>
     </div>
 </div>

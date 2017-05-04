@@ -85,5 +85,22 @@ class Esite extends BaseModel {
         }
         return $bid->summa;
     }
+    
+    public static function getCorrectDateFormat($date) {
+        $osat = explode(' ', $date);
+        $osat = explode('-', $osat[0]);
+        $vuosi = $osat[0];
+        $kuukausi = $osat[1];
+        $paiva = $osat[2];
+        return $paiva . '.' . $kuukausi . '.' . $vuosi;
+    }
+    
+    public function getSulkeutuu() {
+        return Esite::getCorrectDateFormat($this->sulkeutuu);
+    }
+    
+    public function getAvattu() {
+        return Esite::getCorrectDateFormat($this->avattu);
+    }
 
 }

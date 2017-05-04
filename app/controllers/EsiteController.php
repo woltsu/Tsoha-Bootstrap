@@ -16,15 +16,22 @@ class EsiteController extends BaseController {
         }
         $suurinTarjous = Tarjous::suurin($id);
         $tuoteluokat = EsitteenTuoteluokka::haeTuoteluokatEsitteenPerusteella($id);
-        View::make("esite/product_show.html", array('esite' => $esite, 'suurin' => $suurinTarjous, 'tuoteluokat' => $tuoteluokat));
+        
+        $sulkeutuu = $esite->sulkeutuu;
+        $avattu = $esite->getAvattu();
+        
+        View::make("esite/product_show.html", array('esite' => $esite, 'suurin' => $suurinTarjous, 'tuoteluokat' => $tuoteluokat, 'sulkeutuu' => $sulkeutuu, 'avattu' => $avattu));
     }
-
+    
     public static function muokkaa($id) {
         self::check_admin();
         $esite = Esite::find($id);
         $tuoteluokat = Tuoteluokka::all();
         $esitteenTuoteluokat = EsitteenTuoteluokka::haeTuoteluokatEsitteenPerusteella($id);
-        View::make("esite/product_edit.html", array('esite' => $esite, 'tuoteluokat' => $tuoteluokat, 'esitteenTuoteluokat' => $esitteenTuoteluokat));
+        
+        $sulkeutuu = $esite->getSulkeutuu();
+        
+        View::make("esite/product_edit.html", array('esite' => $esite, 'tuoteluokat' => $tuoteluokat, 'esitteenTuoteluokat' => $esitteenTuoteluokat, 'sulkeutuu' => $sulkeutuu));
     }
 
     public static function paivita($id) {
@@ -34,7 +41,7 @@ class EsiteController extends BaseController {
             $image = file_get_contents($_FILES['picture']['tmp_name']);
             $image = '<img src="data:image/jpeg;base64,' . base64_encode($image) . '" height="400" width="600"/>';
         } catch (Exception $e) {
-            $image = null;
+            $image = Esite::find($id)->kuva;
         }
         $attributes = array('nimi' => $params['name'], 'kuva' => $image, 'aloitushinta' => $params['startPrice'], 'sulkeutuu' => $params['ends'], 'kuvaus' => $params['description']);
         $esite = new Esite($attributes);

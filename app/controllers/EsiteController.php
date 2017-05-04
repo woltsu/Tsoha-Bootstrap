@@ -17,7 +17,7 @@ class EsiteController extends BaseController {
         $suurinTarjous = Tarjous::suurin($id);
         $tuoteluokat = EsitteenTuoteluokka::haeTuoteluokatEsitteenPerusteella($id);
         
-        $sulkeutuu = $esite->sulkeutuu;
+        $sulkeutuu = $esite->getSulkeutuu();
         $avattu = $esite->getAvattu();
         
         View::make("esite/product_show.html", array('esite' => $esite, 'suurin' => $suurinTarjous, 'tuoteluokat' => $tuoteluokat, 'sulkeutuu' => $sulkeutuu, 'avattu' => $avattu));

@@ -9,7 +9,7 @@ Yleisiä linkkejä:
 ## Työn aihe
 
 Työn aihe on verkkohuutokauppa, johon huutokaupan ylläpitäjä voi lisätä tuotteitaan myyntiin. Tavalliset käyttäjät voivat
-rekisteröityä sovellukseen, minkä jälkeen he voivat tehdä tarjouksia tuotteista. Selailla voi tuotteita kuka tahansa. Tuotteita voidaan myös kategorisoida tiettyihin tuoteluokkiin.
+rekisteröityä sovellukseen, minkä jälkeen he voivat tehdä tarjouksia tuotteista. Selailla voi tuotteita kuka tahansa. Tuotteita voidaan myös kategorisoida tiettyihin tuoteluokkiin. Ylläpitäjä voi myös tarkastella kunkin tuotteiden tarjouksia.
 
 ## Eri sivuja (jos tähti niin pitää olla kirjautunut adminina)
 [Etusivu](http://wolli.users.cs.helsinki.fi/huuto/)  

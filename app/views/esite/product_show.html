@@ -10,10 +10,10 @@
     {{esite.showImage}}
 </div>
 <ul>
-    <li><strong>Lisätty:</strong>{{avattu}}</li>
-    <li><strong>Sulkeutuu:</strong>{{sulkeutuu}}</li>
-    <li><strong>Lähtöhinta:</strong>{{esite.aloitushinta}} €</li>
-    <li><strong>Suurin tarjous:</strong>{{suurin.summa}} €</li>
+    <li><strong>Lisätty: </strong>{{avattu}}</li>
+    <li><strong>Sulkeutuu: </strong>{{sulkeutuu}}</li>
+    <li><strong>Lähtöhinta: </strong>{{esite.aloitushinta}} €</li>
+    <li><strong>Suurin tarjous: </strong>{{suurin.summa}} €</li>
     <div style="margin-top: 1%;">
         <label>Tuoteluokat: </label>
         {% for tuoteluokka in tuoteluokat %}
@@ -23,7 +23,12 @@
 </ul>
 
 <label>Kuvaus</label>
-<p>{{esite.kuvaus}}</p>
+<div>
+    <textarea rows="5" cols="35" disabled style="background-color: white">
+    {{esite.kuvaus}}
+    </textarea>
+</div>
+
 
 <div>
     <form method="post" action="{{base_path}}/esitteet/{{esite.id}}" class="form-inline">
